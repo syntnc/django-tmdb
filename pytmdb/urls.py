@@ -17,8 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from movies import views
+
 urlpatterns = [
     path('', include('movies.urls')),
-    path('movies/', include('movies.urls')),
+    # path('movies/', include(('movies.urls', 'movies'), namespace='movies')),
+    # path('details/', include(('movies.urls', 'movies'), namespace='details')),
+    path('movies/', views.home, name='movies'),
+    path('details/', views.details, name='details'),
     path('admin/', admin.site.urls),
 ]

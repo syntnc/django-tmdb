@@ -1,0 +1,171 @@
+{% extends "base.html" %} {% block content %}
+<section class="result">
+    <div>
+        <div class="container">
+            <div class="details" background="https://image.tmdb.org/t/p/original{{ info.backdrop_path }}">
+                <div class="sidebar">
+                    <img class="details__image" src='https://image.tmdb.org/t/p/w600_and_h900_bestv2{{ info.poster_path }}' onerror="this.src='https://dummyimage.com/600x900/ababab/ffffff.png&amp;text=+Poster'"/>
+
+                    <div class="details__content-header">
+                        <p>Runtime</p>
+                    </div>
+                    <div class="details__content" style="margin-left: 2rem">
+                        {% if info.runtime %}
+                            <p>{{ info.runtime }} mins</p>
+                        {% else %}
+                            <p>⸺</p>
+                        {% endif %}
+                    </div>
+
+
+                    <div class="details__content-header">
+                        <p>Genres</p>
+                    </div>
+                    <div class="details__content" style="margin-left: 2rem">
+                        {% if info.genres %} 
+                            {% for genre in info.genres %}
+                                <p>{{ genre.name }}</p>
+                            {% endfor %} 
+                        {% else %}
+                        <p>⸺</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="details__content-header">
+                        <p>Production</p>
+                    </div>
+                    <div class="details__content" style="margin-left: 2rem">
+                        {% if info.production_companies %} 
+                            {% for company in info.production_companies %}
+                                <p>{{ company.name }}</p>
+                            {% endfor %}
+                        {% else %}
+                            <p>⸺</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="details__content-header">
+                        <p>Spoken Languages</p>
+                    </div>
+                    <div class="details__content" style="margin-left: 2rem">
+                        {% if info.spoken_languages %}
+                            {% for language in info.spoken_languages %}
+                                <p>{{ language.name }}</p>
+                            {% endfor %}
+                        {% else %}
+                            <p>⸺</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="details__content-header">
+                        <p>Trailer</p>
+                    </div>
+                    {% for trailer in trailers %}
+                    <div class="details__content" >
+                        <div class="embed-responsive embed-responsive-4by3">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ trailer.key }}"></iframe>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+                <div class="content" style="margin-left: 3rem;">
+                    <div class="details__title">
+                        <p style="display: inline;">{{ info.title }}</p>
+                        <p style="display: inline;">({{ year }})</p>
+                    </div>
+                    <div class="details__title">
+                        <i class="fa fa-star" style="color: limegreen"></i>
+                        <p style="display: inline; font-size: 2rem; color: limegreen; font-weight: 900">{{ info.vote_average }}/10</p>
+                    </div>
+                    <div class="details__content-header" style="font-size: 1.5rem; text-transform: uppercase; ">
+                        <p>{{ info.tagline }}</p>
+                    </div>
+                    <div class="details__content" style="font-size: 1rem; margin-top: 2rem">
+                        <p>
+                            {{ info.overview }}
+                        </p>
+                    </div>
+
+                    <div class="credits">
+                        {% if cast %}
+                        <div class="credit-list">
+                            <div class="details__content-header">
+                                <p>Cast</p>
+                            </div>
+                            {% for member in cast %}
+                            <div class="details__content">
+                                <p style="display:inline;">{{ member.name }}</p>
+                                {% if member.character %}
+                                <p style="display:inline; color: limegreen; font-size: 1rem;">as {{ member.character }}</p>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %} {% if crew %}
+                        <div class="credit-list">
+                            <div class="details__content-header">
+                                <p>Crew</p>
+                            </div>
+                            {% for member in crew %}
+                            <div class="details__content">
+                                <p style="display:inline;">{{ member.name }}</p>
+                                {% if member.job %}
+                                <p style="display:inline; color: limegreen; font-size: 1rem;">, {{ member.job }}</p>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %} {% if trailers %}
+                        <div class="content">
+                            <div class="details__content-header">
+                                <p>Also known as</p>
+                            </div>
+                            <div class="details__content" style="font-size: 1rem;">
+                                {% if alt %}
+                                    {% for title in alt %}
+                                        <p>{{ title.title }}</p>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>⸺</p>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="details__content-header">
+                                <p>Keywords</p>
+                            </div>
+                            <div class="details__content">
+                                {% if keywords %} {% for keyword in keywords %}
+                                <p style="font-size: 1rem;">{{ keyword.name }}</p>
+                                {% endfor %} {% else %}
+                                <p>⸺</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="sidebar">
+                </div>
+                <div class="content" style="margin-left: 2rem;">
+                    {% if reviews %}
+                        <div class="details__content-header">
+                            <p>Reviews</p>
+                        </div>
+                        {% for review in reviews %}
+                            <div class="details__content">
+                                <p>{{ review.author }}</p>
+                                <p style="font-size: 1rem;">{{ review.content }}</p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

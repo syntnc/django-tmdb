@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="search">
+        <div class="search__container">
+            <form class="search-form" method="GET" action="">
+                <input class="search-form__query" type="text" placeholder="Search" name="query">
+            </form>
+        </div>
+    </div>
+    <section class="result">
+        <div class="container">
+            <div class="movies">
+                {% if has_result %}
+                    {% for movie in search_result %}
+                        <div class="movies__item">
+                            <i class="movies__item-star fa fa-star hide"></i>
+                            <p class="movies__item-rating hide">{{ movie.vote_average }}/10</p>
+                            <a href="{% url 'details' %}{{ movie.id }}" id="modal-trigger" class="movies__item-expander hide">View Details</a>
+                            <img class="movies__item-image" src='https://image.tmdb.org/t/p/w600_and_h900_bestv2{{ movie.poster_path }}' onerror="this.src='https://dummyimage.com/600x900/ababab/ffffff.png&amp;text=+Poster'"/>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="movies__item-title">No results found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock content %}
