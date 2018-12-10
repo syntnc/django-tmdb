@@ -9,7 +9,7 @@ A movie-search engine based on Django, powered by TMDb.
     - [Dependencies](#dependencies)
     - [Usage](#usage)
         - [Install Dependencies](#install-dependencies)
-    - [Run](#run)
+        - [Run](#run)
     - [Live Demo](#live-demo)
 
 ## Platform
@@ -46,7 +46,7 @@ Dependencies must be set up in an enviroment before using the project. Follow th
     pip install -r requirements.txt
   ```
 
-## Run
+### Run
     ```
         python manage.py runserver
         OR
