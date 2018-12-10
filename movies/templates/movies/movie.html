@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="{% static 'movies/app.css' %}"/>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <nav class="nav">
+                <div class="container">
+                    <div class="nav__menu">
+                        <a class="nav__header" href="/">Django TMDb Search</a>
+                    </div>
+                    <div class="search__container">
+                        <form class="search-form" method="GET" action="">
+                            <input class="search-form__query" type="text" placeholder="Search" name="query">
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <section class="result">
+                <div class="container">
+                    <div class="movies">
+                        {% for movie in search_result %}
+                            <div class="movies__item">
+                                <i class="movies__item-star fa fa-star hide"></i>
+                                <p class="movies__item-rating hide">{{ movie.vote_average }}/10</p>
+                                <!-- <p class="movies__item-title">{{ movie.title }}</p> -->
+                                <a href="details.html" id="modal-trigger" class="movies__item-expander hide">View Details</a>
+                                <img class="movies__item-image" src='https://image.tmdb.org/t/p/w600_and_h900_bestv2{{ movie.poster_path }}' onerror="this.src='https://dummyimage.com/600x900/ababab/ffffff.png&amp;text=+Poster'"/>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+        <script src="{% static 'movies/app.js' %}"></script>
+    </body>
+</html>
