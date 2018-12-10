@@ -284,7 +284,6 @@ body::before {
     flex-wrap: wrap;
     min-height: 90vh;
     z-index: 10;
-    opacity: ;
 
     display: grid;
     grid-template-columns: 300px 900px;
